@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.egcc.iberotec.appsoft.mybatis.espec.EmpleadoMapper">
+
+	<sql id="camposEmpleado">
+		chr_emplcodigo    codigo,
+		vch_emplpaterno   paterno,
+		vch_emplmaterno   materno,
+		vch_emplnombre    nombre,
+		vch_emplciudad    ciudad,
+		vch_empldireccion direccion,
+		vch_emplusuario   usuario
+	</sql>
+	
+	<select id="validar" resultType="EmpleadoBean">
+		select
+			<include refid="camposEmpleado" />
+		from empleado
+		where vch_emplusuario = #{usuario}
+		and vch_emplclave = #{clave}
+	</select>
+
+</mapper>

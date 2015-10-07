@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.egcc.iberotec.appsoft.mybatis.espec.CuentaMapper">
+
+	<sql id="camposCuenta">
+		chr_cuencodigo        cuencodigo,        
+		chr_monecodigo        monecodigo,        
+		chr_sucucodigo        sucucodigo,        
+		chr_emplcreacuenta    creacuenta,    
+		chr_cliecodigo        cliecodigo,        
+		dec_cuensaldo         cuensaldo,         
+		dtt_cuenfechacreacion fechacreacion, 
+		vch_cuenestado        cuenestado,        
+		int_cuencontmov       contmov
+	</sql>
+	
+	<select id="obtenerCuenta" parameterType="string" resultType="CuentaBean">
+		select
+ 			<include refid="camposCuenta"/>
+		from cuenta
+		where chr_cuencodigo = #{cuenta}
+	</select>
+	
+	<update id="actualizarCuenta" parameterType="CuentaBean">
+		update cuenta set     
+		dec_cuensaldo = #{cuensaldo},
+		int_cuencontmov   = #{contmov}     
+		where chr_cuencodigo = #{cuencodigo}
+	</update>
+	
+	<insert id="registrarMovimiento" parameterType="MovimientoBean">
+		insert into movimiento(chr_cuencodigo,int_movinumero,
+		dtt_movifecha, chr_emplcodigo, chr_tipocodigo,
+		dec_moviimporte, chr_cuenreferencia)
+		values(#{cuencodigo},#{movinumero},getdate(),#{emplcodigo},
+		#{tipocodigo},#{moviimporte},#{referencia})
+	</insert>
+	
+	
+</mapper>

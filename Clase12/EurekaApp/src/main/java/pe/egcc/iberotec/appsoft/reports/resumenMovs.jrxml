@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="resumenMovs" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1de984ba-e569-4a5b-a351-48ac969bfc83">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<field name="sucucodigo" class="java.lang.String"/>
+	<field name="sucunombre" class="java.lang.String"/>
+	<field name="ingreso" class="java.lang.Double"/>
+	<field name="salida" class="java.lang.Double"/>
+	<field name="diferencia" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="222" height="57" uuid="0200bf43-e1ea-430b-bf8e-b68f33dc053d"/>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement x="162" y="0" width="240" height="24" uuid="1145a0ed-f351-4d9b-9eb6-bc5c239674e0"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RESUMEN DE MOVIMIENTOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="29" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="111" height="20" uuid="213fe284-0dd7-4de0-bbb4-0a185e119c70"/>
+				<text><![CDATA[sucucodigo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="111" y="0" width="111" height="20" uuid="47d80171-0df1-462b-bad0-2b35ab23c233"/>
+				<text><![CDATA[sucunombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="222" y="0" width="111" height="20" uuid="e0f681e7-de84-4edf-8a6a-f393c283e141"/>
+				<text><![CDATA[ingreso]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="333" y="0" width="111" height="20" uuid="aa5c117f-603e-4cff-8b80-a5d6eb3711d1"/>
+				<text><![CDATA[salida]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="444" y="0" width="111" height="20" uuid="b44b8ab5-a9ad-4a0c-9b06-4207644cf277"/>
+				<text><![CDATA[diferencia]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="555" height="1" uuid="94dd22dd-9baa-4adc-9a8c-be96d4215b44"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="111" height="20" uuid="170a6efe-23c3-40e1-8272-246861356727"/>
+				<textFieldExpression><![CDATA[$F{sucucodigo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="111" y="0" width="111" height="20" uuid="8bb3ed74-9acb-4863-8deb-a9ab7e0bd075"/>
+				<textFieldExpression><![CDATA[$F{sucunombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="222" y="0" width="111" height="20" uuid="62f7690d-b03c-489d-88bf-fb6ffbbc441e"/>
+				<textFieldExpression><![CDATA[$F{ingreso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="333" y="0" width="111" height="20" uuid="764b4625-7f7b-42ca-ac16-866ea967743a"/>
+				<textFieldExpression><![CDATA[$F{salida}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="444" y="0" width="111" height="20" uuid="8d7a2c62-7ee5-4298-a6a6-99b91c49b67a"/>
+				<textFieldExpression><![CDATA[$F{diferencia}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

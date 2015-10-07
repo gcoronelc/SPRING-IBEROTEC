@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pe.egcc.iberotec.appsoft.mybatis.espec.ClienteMapper">
+
+	<sql id="camposCliente">
+			chr_cliecodigo     codigo,    
+			vch_cliepaterno    paterno,   
+			vch_cliematerno    materno,   
+			vch_clienombre     nombre,    
+			chr_cliedni        dni,       
+			vch_clieciudad     ciudad,    
+			vch_cliedireccion  direccion, 
+			vch_clietelefono   telefono,  
+			vch_clieemail      email
+	</sql>
+	
+	<sql id="filtrosCliente">
+		<where>
+			<if test="codigo != ''">
+				AND CHR_CLIECODIGO = #{codigo}
+			</if>
+			<if test="paterno != ''">
+				AND VCH_CLIEPATERNO LIKE #{paterno} + '%'
+			</if>
+			<if test="materno != ''">
+				AND VCH_CLIEMATERNO LIKE #{materno} + '%'
+			</if>
+			<if test="nombre != ''">
+				AND VCH_CLIENOMBRE LIKE #{nombre} + '%'
+			</if>
+			<if test="dni != ''">
+				AND VCH_CLIEDNI = #{dni}
+			</if>
+			<if test="ciudad != ''">
+				AND VCH_CLIECIUDAD LIKE #{ciudad} + '%'
+			</if>
+			<if test="direccion != ''">
+				AND VCH_CLIEDIRECCION LIKE #{direccion} + '%'
+			</if>
+			<if test="telefono != ''">
+				AND VCH_CLIEDIRECCION LIKE #{telefono} + '%'
+			</if>
+			<if test="email != ''">
+				AND VCH_CLIEEMAIL LIKE '%' + #{email} + '%'
+			</if>
+		</where>
+	</sql>
+  
+    
+	<select id="getTodos" resultType="ClienteBean">
+		select
+ 			<include refid="camposCliente"/>
+		from cliente
+	</select>
+	
+	
+	<select id="getClientes" parameterType="ClienteBean" resultType="ClienteBean">
+		select
+			<include refid="camposCliente"/>
+		from cliente
+		<include refid="filtrosCliente"/>
+	</select>
+
+	<select id="getCliente" parameterType="string" resultType="ClienteBean">
+		select
+			<include refid="camposCliente"/>
+		from cliente
+		where chr_cliecodigo = #{codigo}
+	</select>
+	
+	<update id="modificar" parameterType="ClienteBean">
+		update cliente set   
+			vch_cliepaterno   = #{paterno},   
+			vch_cliematerno   = #{materno},   
+			vch_clienombre    = #{nombre},    
+			chr_cliedni       = #{dni},       
+			vch_clieciudad    = #{ciudad},    
+			vch_cliedireccion = #{direccion}, 
+			vch_clietelefono  = #{telefono},  
+			vch_clieemail     = #{email}
+		where chr_cliecodigo = #{codigo}
+	</update>
+	
+	<select id="getContador" resultType="map">
+		select int_contitem, int_contlongitud 
+		from contador
+		where vch_conttabla='Cliente'
+	</select>
+	
+	<update id="actcontador" parameterType="int">
+		update contador
+		set int_contitem = #{contador}
+		where vch_conttabla='Cliente'
+	</update>
+	
+	
+	<insert id="insertar" parameterType="ClienteBean">
+		insert into cliente(chr_cliecodigo,vch_cliepaterno,vch_cliematerno,  
+		vch_clienombre,chr_cliedni,vch_clieciudad,vch_cliedireccion,
+		vch_clietelefono,vch_clieemail)
+		values(#{codigo},#{paterno},#{materno},#{nombre},#{dni},
+		#{ciudad},#{direccion},#{telefono},#{email})
+	</insert>
+</mapper>

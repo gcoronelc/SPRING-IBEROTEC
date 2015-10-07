@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="pe.egcc.iberotec.appsoft.mybatis.espec.ConsultaMapper">
+
+
+	<select id="obtenerResumen" resultType="map">
+		SELECT
+			sucucodigo, sucunombre,
+			[ingreso], [salida], [ingreso]-[salida] diferencia
+		FROM
+			(select
+			sucucodigo, sucunombre,
+			tipoaccion, sum(moviimporte) importe
+			from v_movimiento
+			group by sucucodigo, sucunombre, tipoaccion) AS DATA
+			PIVOT(
+			SUM(importe) FOR tipoaccion IN ([ingreso],[salida]) ) AS PVT_TABLE
+			ORDER BY sucucodigo
+	</select>
+	
+	<select id="obtenerMovimientos" 
+	parameterType="string" resultType="map">
+	  select 
+	  	cuencodigo, movinumero, tipocodigo, 
+	  	tiponombre, tipoaccion, movifecha, moviimporte
+		from v_movimiento
+		where cuencodigo=#{cuenta};
+	</select>
+
+</mapper>
